@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>THE LABORATORY - Viral Labs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800;900&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#370e00",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary-container": "#b4b5b5",
+                        "on-primary": "#5a1c00",
+                        "surface-container-highest": "#353534",
+                        "secondary": "#c6c6c7",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#7f2b00",
+                        "on-tertiary": "#2f3131",
+                        "outline-variant": "#5b4137",
+                        "on-primary-container": "#531a00",
+                        "tertiary-fixed": "#e3e2e2",
+                        "primary-fixed-dim": "#ffb599",
+                        "error-container": "#93000a",
+                        "outline": "#ab8a7d",
+                        "inverse-on-surface": "#313030",
+                        "surface-container": "#201f1f",
+                        "surface-variant": "#353534",
+                        "on-background": "#e5e2e1",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-error": "#690005",
+                        "primary-container": "#ff5f00",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "on-tertiary-container": "#2c2d2d",
+                        "primary-fixed": "#ffdbce",
+                        "tertiary-fixed-dim": "#c7c6c6",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-secondary": "#2f3131",
+                        "on-surface-variant": "#e4bfb1",
+                        "inverse-primary": "#a63b00",
+                        "surface": "#131313",
+                        "primary": "#ffb599",
+                        "secondary-fixed": "#e2e2e2",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#393939",
+                        "tertiary-container": "#949494",
+                        "tertiary": "#c7c6c6",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-tertiary-fixed-variant": "#464747",
+                        "secondary-container": "#454747",
+                        "surface-tint": "#ffb599"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "grid-unit": "8px",
+                        "margin": "40px",
+                        "container-max": "1440px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Lexend"],
+                        "body-md": ["Lexend"],
+                        "data-mono": ["Space Grotesk"],
+                        "headline-xl": ["Lexend"],
+                        "body-lg": ["Lexend"],
+                        "headline-lg": ["Lexend"],
+                        "label-caps": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "data-mono": ["14px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "headline-xl": ["80px", { "lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .grid-bg-fine {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+        .ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .ticker {
+            display: inline-block;
+            animation: ticker 20s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen grid-bg flex flex-col overflow-x-hidden relative">
+<!-- Top AppBar (Web) -->
+<header class="hidden md:flex justify-between items-center px-6 py-4 w-full h-20 bg-black/90 backdrop-blur-xl docked full-width top-0 border-b-2 border-[#FF5F00] z-50 fixed">
+<div class="text-2xl font-black tracking-tighter text-[#FF5F00] font-['Lexend']">THE VIRAL LABS</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-white/60 hover:text-white transition-colors cursor-pointer text-sm">science</span>
+<span class="material-symbols-outlined text-white/60 hover:text-white transition-colors cursor-pointer text-sm">biotech</span>
+<span class="material-symbols-outlined text-white/60 hover:text-white transition-colors cursor-pointer text-sm">terminal</span>
+</div>
+</header>
+<!-- SideNavBar (Mobile - Re-interpreted as a Bottom Nav for strict mapping, but keeping SideNav structure as requested by JSON if we were building the full shell. We'll use a hamburger menu concept or suppress on Hero if strictly following "Hero" intent, but standard dictates showing Nav if it's the main entry point. Let's render the SideNavBar for desktop structure to match the prompt's implied complexity, but hide on mobile for simplicity in this demo. -->
+<div class="flex flex-1 pt-20 md:pt-0">
+<!-- Side Nav (Web only, hidden on mobile) -->
+<nav class="hidden md:flex flex-col h-full pt-24 bg-black border-r border-white/20 fixed left-0 top-0 w-64 border-r border-white/10 z-40">
+<div class="px-4 pb-8 border-b border-white/10 mb-4">
+<div class="font-['Lexend'] uppercase tracking-widest text-xs text-[#FF5F00] mb-1">BIO-CONSOLE v1.0</div>
+<div class="font-data-mono text-label-caps text-surface-variant">STATUS: AGGRESSIVE</div>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<!-- SEQUENCES is active as it's the primary "home/hero" equivalent here -->
+<a class="bg-[#FF5F00] text-black font-bold p-4 flex items-center gap-3 w-full font-['Lexend'] uppercase tracking-widest text-xs scale-95 opacity-90 translate-x-1" href="#">
+<span class="material-symbols-outlined">genetics</span>
+                    SEQUENCES
+                </a>
+<a class="text-white/40 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all font-['Lexend'] uppercase tracking-widest text-xs hover:bg-white/10 hover:text-white" href="#">
+<span class="material-symbols-outlined">microbiology</span>
+                    CULTURES
+                </a>
+<a class="text-white/40 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all font-['Lexend'] uppercase tracking-widest text-xs hover:bg-white/10 hover:text-white" href="#">
+<span class="material-symbols-outlined">coronavirus</span>
+                    MUTATIONS
+                </a>
+<a class="text-white/40 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all font-['Lexend'] uppercase tracking-widest text-xs hover:bg-white/10 hover:text-white" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+                    ANALYTICS
+                </a>
+<a class="text-white/40 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all font-['Lexend'] uppercase tracking-widest text-xs hover:bg-white/10 hover:text-white" href="#">
+<span class="material-symbols-outlined">folder_zip</span>
+                    ARCHIVE
+                </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 relative w-full overflow-hidden">
+<!-- Abstract Blob / Spills behind content -->
+<div class="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-primary-container/20 rounded-full blur-[100px] mix-blend-screen pointer-events-none z-0"></div>
+<div class="absolute bottom-[-20%] left-[10%] w-[600px] h-[600px] bg-error-container/30 rounded-full blur-[120px] mix-blend-exclusion pointer-events-none z-0"></div>
+<div class="relative z-10 w-full min-h-[calc(100vh-5rem)] flex flex-col justify-center py-20 px-6 md:px-12 lg:px-24">
+<!-- Label / Section Header -->
+<div class="mb-8 flex items-center gap-4 border-b border-surface-variant pb-2 max-w-2xl">
+<span class="w-2 h-2 bg-primary-container block"></span>
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">THE LABORATORY</span>
+</div>
+<!-- Hero Content Asymmetrical Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative">
+<!-- Text Block (Spans 8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-6 pt-4 relative">
+<!-- Grid connector decorative line -->
+<div class="hidden lg:block absolute left-[-2rem] top-0 w-px h-[120%] bg-white/10"></div>
+<div class="hidden lg:block absolute left-[-2rem] top-0 w-2 h-px bg-white/30"></div>
+<h1 class="font-headline-xl text-headline-xl text-on-background uppercase break-words leading-[0.9]">
+                            WE’LL MAKE YOU GO VIRAL <span class="text-primary-container block mt-2">- IN 90 DAYS</span>
+</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-xl mt-4 border-l-2 border-primary-container pl-6 py-2 bg-surface-container-low/50 backdrop-blur-sm">
+                            6M+ views across platforms in 26 days for a real estate brand. Protocol initiated.
+                        </p>
+<!-- Buttons -->
+<div class="flex flex-col sm:flex-row gap-4 mt-8">
+<button class="bg-primary-container text-black font-headline-md font-bold text-sm px-8 py-4 uppercase tracking-widest hover:bg-white transition-colors duration-200 shadow-[4px_4px_0px_0px_rgba(255,95,0,0.3)] hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] translate-x-0 hover:translate-x-0.5 hover:translate-y-0.5">
+                                INITIATE SEQUENCE
+                            </button>
+<button class="border border-white text-white font-headline-md font-bold text-sm px-8 py-4 uppercase tracking-widest hover:bg-primary-container hover:text-black transition-colors duration-200 hover:border-primary-container">
+                                VIEW DATA LOGS
+                            </button>
+</div>
+</div>
+<!-- "Petri Dish" / Data Card (Spans 4 cols, offset) -->
+<div class="lg:col-span-4 lg:mt-24 relative">
+<!-- Connector -->
+<div class="hidden lg:block absolute right-[110%] top-1/2 w-[200px] h-px bg-white/10"></div>
+<div class="hidden lg:block absolute right-[110%] top-1/2 w-2 h-2 rounded-full bg-primary-container translate-y-[-50%]"></div>
+<div class="bg-surface-container-low/40 backdrop-blur-[24px] border border-white/10 p-8 relative overflow-hidden rounded-tr-[40px] rounded-bl-[40px] shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] grid-bg-fine">
+<div class="absolute top-0 right-0 p-4 opacity-30">
+<span class="material-symbols-outlined text-4xl">science</span>
+</div>
+<h3 class="font-data-mono text-data-mono text-primary-container mb-6 border-b border-white/10 pb-2">LIVE METRICS // PROTOCOL ACTIVE</h3>
+<div class="space-y-4">
+<div class="bg-black/50 p-3 border border-white/5 flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-secondary">VIRALITY INDEX</span>
+<span class="font-data-mono text-data-mono text-white text-lg">98.4%</span>
+</div>
+<div class="bg-black/50 p-3 border border-white/5 flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-secondary">ENGAGEMENT RATE</span>
+<span class="font-data-mono text-data-mono text-white text-lg">12.7x</span>
+</div>
+<div class="bg-black/50 p-3 border border-white/5 flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-secondary">SYSTEM STATUS</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#00FF00] animate-pulse"></span>
+<span class="font-data-mono text-data-mono text-[#00FF00]">OPTIMAL</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ECG Ticker -->
+<div class="w-full bg-black border-y-2 border-primary-container/50 py-3 relative z-20 overflow-hidden flex items-center">
+<div class="absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-black to-transparent z-10"></div>
+<div class="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-black to-transparent z-10"></div>
+<div class="ticker-wrap w-full flex items-center">
+<div class="ticker flex gap-12 items-center font-data-mono text-data-mono text-primary-container whitespace-nowrap">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">show_chart</span> Spandan: 2.3M Views</span>
+<span class="text-white/20">///</span>
+<span class="flex items-center gap-2 text-white"><span class="material-symbols-outlined text-sm">group_add</span> Kapil: 25K Followers</span>
+<span class="text-white/20">///</span>
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">payments</span> Housypoint: $100K Deal</span>
+<span class="text-white/20">///</span>
+<!-- Repeat for seamless loop -->
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">show_chart</span> Spandan: 2.3M Views</span>
+<span class="text-white/20">///</span>
+<span class="flex items-center gap-2 text-white"><span class="material-symbols-outlined text-sm">group_add</span> Kapil: 25K Followers</span>
+<span class="text-white/20">///</span>
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">payments</span> Housypoint: $100K Deal</span>
+</div>
+</div>
+</div>
+<!-- Footer component from JSON -->
+<footer class="w-full py-8 px-10 flex flex-col md:flex-row justify-between items-center bg-[url('https://www.transparenttextures.com/patterns/graph-paper.png')] bg-fixed bg-black border-t-2 border-[#FF5F00] relative z-20 mt-12">
+<div class="text-[#FF5F00] font-mono uppercase text-[10px] tracking-widest mb-4 md:mb-0">
+                    ©2024 THE VIRAL LABS // EXPERIMENTAL PROTOCOL SECURED
+                </div>
+<div class="flex gap-6 font-mono uppercase text-[10px] tracking-widest">
+<a class="text-white/30 hover:text-white transition-colors" href="#">REPORT BUG</a>
+<a class="text-white/30 hover:text-white transition-colors" href="#">TERMINATE SESSION</a>
+<a class="text-white/30 hover:text-white transition-colors" href="#">DATA PRIVACY</a>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

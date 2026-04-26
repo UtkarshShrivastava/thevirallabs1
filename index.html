@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>THE VIRAL LABS - Full Platform</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#370e00",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary-container": "#b4b5b5",
+                        "on-primary": "#5a1c00",
+                        "surface-container-highest": "#353534",
+                        "secondary": "#c6c6c7",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#7f2b00",
+                        "on-tertiary": "#2f3131",
+                        "outline-variant": "#5b4137",
+                        "on-primary-container": "#531a00",
+                        "tertiary-fixed": "#e3e2e2",
+                        "primary-fixed-dim": "#ffb599",
+                        "error-container": "#93000a",
+                        "outline": "#ab8a7d",
+                        "inverse-on-surface": "#313030",
+                        "surface-container": "#201f1f",
+                        "surface-variant": "#353534",
+                        "on-background": "#e5e2e1",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-error": "#690005",
+                        "primary-container": "#ff5f00",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "on-tertiary-container": "#2c2d2d",
+                        "primary-fixed": "#ffdbce",
+                        "tertiary-fixed-dim": "#c7c6c6",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-secondary": "#2f3131",
+                        "on-surface-variant": "#e4bfb1",
+                        "inverse-primary": "#a63b00",
+                        "surface": "#131313",
+                        "primary": "#ffb599",
+                        "secondary-fixed": "#e2e2e2",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#393939",
+                        "tertiary-container": "#949494",
+                        "tertiary": "#c7c6c6",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-tertiary-fixed-variant": "#464747",
+                        "secondary-container": "#454747",
+                        "surface-tint": "#ffb599"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "grid-unit": "8px",
+                        "margin": "40px",
+                        "container-max": "1440px",
+                        "gutter": "24px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Lexend"],
+                        "body-md": ["Lexend"],
+                        "data-mono": ["Space Grotesk"],
+                        "headline-xl": ["Lexend"],
+                        "body-lg": ["Lexend"],
+                        "headline-lg": ["Lexend"],
+                        "label-caps": ["Space Grotesk"]
+                    },
+                    fontSize: {
+                        "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "data-mono": ["14px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "headline-xl": ["80px", { "lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .grid-bg-fine {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+        .petri-glass {
+            backdrop-filter: blur(20px);
+            background: rgba(28, 27, 27, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .organic-blob-1 { border-radius: 43% 57% 65% 35% / 44% 39% 61% 56%; }
+        .organic-blob-2 { border-radius: 61% 39% 36% 64% / 44% 53% 47% 56%; }
+        .ticker-wrap { overflow: hidden; white-space: nowrap; display: flex; }
+        .ticker { display: flex; width: max-content; animation: ticker 40s linear infinite; }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen grid-bg flex flex-col overflow-x-hidden relative selection:bg-primary-container selection:text-black">
+    <!-- Top AppBar -->
+    <header class="hidden md:flex justify-between items-center px-6 py-4 w-full h-20 bg-black/90 backdrop-blur-xl border-b-2 border-[#FF5F00] z-50 fixed top-0">
+        <div class="text-2xl font-black tracking-tighter text-[#FF5F00] font-['Lexend']">THE VIRAL LABS</div>
+        <nav class="flex gap-8 items-center h-full">
+        </nav>
+        <div class="flex items-center gap-4">
+            <a href="http://instagram.com/utkarshlivee/" target="_blank" class="text-white/60 hover:text-[#FF5F00] transition-colors p-1 flex items-center justify-center">
+                <!-- Instagram SVG -->
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/utkarsh-shrivastava-16b5a4102/" target="_blank" class="text-white/60 hover:text-[#FF5F00] transition-colors p-1 flex items-center justify-center">
+                <!-- LinkedIn SVG -->
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="flex flex-1 pt-20">
+        <!-- Side Nav -->
+        <nav class="hidden md:flex flex-col h-[calc(100vh-5rem)] fixed left-0 top-20 w-64 bg-black border-r border-white/10 z-40 overflow-y-auto">
+            <div class="px-6 py-6 border-b border-white/10 mb-2">
+                <div class="font-['Lexend'] uppercase tracking-widest text-xs text-[#FF5F00] font-bold">NAVIGATION</div>
+            </div>
+            <div class="flex-1 flex flex-col gap-2">
+                <a href="#hero" class="text-white/60 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all font-['Lexend'] uppercase tracking-widest text-xs hover:text-[#FF5F00]">
+                    <span class="material-symbols-outlined">home</span> HOME
+                </a>
+                <a href="#portfolio" class="text-white/60 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all font-['Lexend'] uppercase tracking-widest text-xs hover:text-[#FF5F00]">
+                    <span class="material-symbols-outlined">play_circle</span> THE PROOF
+                </a>
+                <a href="#roadmap" class="text-white/60 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all font-['Lexend'] uppercase tracking-widest text-xs hover:text-[#FF5F00]">
+                    <span class="material-symbols-outlined">trending_up</span> THE ROADMAP
+                </a>
+                <a href="#pricing" class="text-white/60 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all font-['Lexend'] uppercase tracking-widest text-xs hover:text-[#FF5F00]">
+                    <span class="material-symbols-outlined">payments</span> PRICING
+                </a>
+                <a href="#reviews" class="text-white/60 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all font-['Lexend'] uppercase tracking-widest text-xs hover:text-[#FF5F00]">
+                    <span class="material-symbols-outlined">forum</span> REVIEWS
+                </a>
+                <a href="#booking" class="text-primary-container/80 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all font-['Lexend'] uppercase tracking-widest text-xs hover:text-[#FF5F00]">
+                    <span class="material-symbols-outlined">calendar_month</span> BOOK CALENDAR
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 md:ml-64 relative w-full overflow-hidden">
+            
+            <!-- ====== HERO SECTION ====== -->
+            <section id="hero" class="relative w-full overflow-hidden pt-12 pb-20">
+                <div class="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-primary-container/20 rounded-full blur-[100px] mix-blend-screen pointer-events-none z-0"></div>
+                <div class="absolute bottom-[-20%] left-[10%] w-[600px] h-[600px] bg-error-container/30 rounded-full blur-[120px] mix-blend-exclusion pointer-events-none z-0"></div>
+                
+                <div class="relative z-10 w-full min-h-[calc(100vh-15rem)] flex flex-col justify-center px-6 md:px-12 lg:px-24">
+                    <div class="mb-8 flex items-center gap-4 border-b border-surface-variant pb-2 max-w-2xl">
+                        <span class="w-2 h-2 bg-primary-container block"></span>
+                        <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">THE LABORATORY</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative">
+                        <div class="lg:col-span-8 flex flex-col gap-6 pt-4 relative">
+                            <div class="hidden lg:block absolute left-[-2rem] top-0 w-px h-[120%] bg-white/10"></div>
+                            <div class="hidden lg:block absolute left-[-2rem] top-0 w-2 h-px bg-white/30"></div>
+                            <h1 class="font-headline-xl text-headline-xl text-on-background uppercase break-words leading-[0.9]">
+                                BOOK FREE <span class="text-primary-container block mt-2">STRATEGY CALL</span>
+                            </h1>
+                            <p class="font-body-lg text-body-lg text-secondary max-w-xl mt-4 border-l-2 border-primary-container pl-6 py-2 bg-surface-container-low/50 backdrop-blur-sm">
+                                Over $1M in homes sold in Canada through our Instagram lead generation strategies.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                                <a href="#pricing" class="inline-block text-center bg-primary-container text-black font-headline-md font-bold text-sm px-8 py-4 uppercase tracking-widest hover:bg-white transition-colors duration-200 shadow-[4px_4px_0px_0px_rgba(255,95,0,0.3)] hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)]">
+                                    GET STARTED
+                                </a>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-4 lg:mt-24 relative">
+                            <div class="hidden lg:block absolute right-[110%] top-1/2 w-[200px] h-px bg-white/10"></div>
+                            <div class="hidden lg:block absolute right-[110%] top-1/2 w-2 h-2 rounded-full bg-primary-container translate-y-[-50%]"></div>
+                            <div class="bg-surface-container-low/40 backdrop-blur-[24px] border border-white/10 p-8 relative overflow-hidden rounded-tr-[40px] rounded-bl-[40px] shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] grid-bg-fine">
+                                <div class="absolute top-0 right-0 p-4 opacity-30"><span class="material-symbols-outlined text-4xl">science</span></div>
+                                <h3 class="font-data-mono text-data-mono text-primary-container mb-6 border-b border-white/10 pb-2">RECENT CAMPAIGN RESULTS</h3>
+                                <div class="space-y-4">
+                                    <div class="bg-black/50 p-3 border border-white/5 flex justify-between items-center">
+                                        <span class="font-label-caps text-label-caps text-secondary">ACCOUNTS REACHED</span>
+                                        <span class="font-data-mono text-data-mono text-white text-lg">2.4M</span>
+                                    </div>
+                                    <div class="bg-black/50 p-3 border border-white/5 flex justify-between items-center">
+                                        <span class="font-label-caps text-label-caps text-secondary">ENGAGEMENT RATE</span>
+                                        <span class="font-data-mono text-data-mono text-white text-lg">12.5%</span>
+                                    </div>
+                                    <div class="bg-black/50 p-3 border border-white/5 flex justify-between items-center">
+                                        <span class="font-label-caps text-label-caps text-secondary">LEADS GENERATED</span>
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-2 h-2 rounded-full bg-[#00FF00] animate-pulse"></span>
+                                            <span class="font-data-mono text-data-mono text-[#00FF00]">ACTIVE</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ECG Ticker -->
+                <div class="w-full bg-black border-y-2 border-primary-container/50 py-3 mt-20 relative z-20 overflow-hidden flex items-center">
+                    <div class="absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-black to-transparent z-10"></div>
+                    <div class="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-black to-transparent z-10"></div>
+                    <div class="ticker-wrap w-full flex items-center">
+                        <div class="ticker flex gap-12 items-center font-data-mono text-data-mono text-primary-container whitespace-nowrap pr-12">
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">architecture</span> Architecture Design Studio: 8.9M Views</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2 text-white"><span class="material-symbols-outlined text-sm">real_estate_agent</span> Realtor Akash Gupta: 945 Views on Last Reel</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">thumb_up</span> Realtor Hitesh Kakaria: 445K FB Views</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2 text-white"><span class="material-symbols-outlined text-sm">rocket_launch</span> Sunfox: 2.3M Views on First Reel</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">payments</span> $1M+ Homes Sold via IG Leads</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2 text-white"><span class="material-symbols-outlined text-sm">music_note</span> Producer Shawn: Released Two Hit Albums</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">content_cut</span> Hairdresser Nitesh: 1M+ Monthly Views</span>
+                            <span class="text-white/20">///</span>
+                            <!-- Duplicate for seamless scroll -->
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">architecture</span> Architecture Design Studio: 8.9M Views</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2 text-white"><span class="material-symbols-outlined text-sm">real_estate_agent</span> Realtor Akash Gupta: 945 Views on Last Reel</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">thumb_up</span> Realtor Hitesh Kakaria: 445K FB Views</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2 text-white"><span class="material-symbols-outlined text-sm">rocket_launch</span> Sunfox: 2.3M Views on First Reel</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">payments</span> $1M+ Homes Sold via IG Leads</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2 text-white"><span class="material-symbols-outlined text-sm">music_note</span> Producer Shawn: Released Two Hit Albums</span>
+                            <span class="text-white/20">///</span>
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">content_cut</span> Hairdresser Nitesh: 1M+ Monthly Views</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== PORTFOLIO SECTION ====== -->
+            <section id="portfolio" class="w-full py-20 relative">
+                <div class="absolute top-20 left-10 w-96 h-96 bg-primary-container opacity-20 rounded-full blur-[100px] mix-blend-screen pointer-events-none z-0"></div>
+                <div class="max-w-[container-max] mx-auto px-6 md:px-12 relative z-10">
+                    <div class="mb-20 border-l-2 border-primary-container pl-6 ml-2">
+                        <h1 class="font-headline-xl text-headline-xl text-on-surface uppercase mb-4 tracking-tighter">THE PROOF</h1>
+                        <h2 class="font-headline-md text-headline-md text-secondary mb-6">CRAFTED VIDEOS FOR EVERY NICHE</h2>
+                        <div class="flex items-center gap-4">
+                            <div class="h-[1px] w-16 bg-primary-container"></div>
+                            <span class="font-data-mono text-data-mono text-primary-container tracking-widest">CLIENT SUCCESS STORIES</span>
+                        </div>
+                    </div>
+                    
+                    <div class="relative w-full group/carousel">
+                        <!-- Navigation Arrows -->
+                        <button onclick="document.getElementById('portfolio-scroll-container').scrollBy({left: -340, behavior: 'smooth'})" class="absolute -left-4 top-1/2 -translate-y-1/2 z-20 bg-black/80 border border-primary-container text-primary-container hover:bg-primary-container hover:text-black w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 transition-all hover:scale-110 shadow-[0_0_20px_rgba(255,95,0,0.4)] hidden md:flex cursor-pointer">
+                            <span class="material-symbols-outlined text-3xl">chevron_left</span>
+                        </button>
+                        <button onclick="document.getElementById('portfolio-scroll-container').scrollBy({left: 340, behavior: 'smooth'})" class="absolute -right-4 top-1/2 -translate-y-1/2 z-20 bg-black/80 border border-primary-container text-primary-container hover:bg-primary-container hover:text-black w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 transition-all hover:scale-110 shadow-[0_0_20px_rgba(255,95,0,0.4)] hidden md:flex cursor-pointer">
+                            <span class="material-symbols-outlined text-3xl">chevron_right</span>
+                        </button>
+
+                        <div id="portfolio-scroll-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 sm:gap-8 relative mb-16 pb-8 pt-4 px-4 sm:px-0 scroll-smooth" style="-ms-overflow-style: none; scrollbar-width: none;">
+                            <style>
+                                #portfolio-scroll-container::-webkit-scrollbar { display: none; }
+                            </style>
+                            <div class="hidden lg:block absolute top-1/2 left-0 w-[3000px] h-[1px] bg-white/10 -z-10 pointer-events-none"></div>
+                            
+                            <!-- Slot 1 -->
+                            <div class="relative group w-[85vw] sm:w-[280px] md:w-[300px] lg:w-[340px] flex-shrink-0 snap-center">
+                                <div class="petri-glass p-2 relative overflow-hidden aspect-[9/16] border border-white/20 transition-all duration-300 group-hover:border-primary-container shadow-2xl">
+                                    <iframe src="https://fast.wistia.net/embed/iframe/4meu3ad7o4?videoFoam=true&playbar=false&fullscreenButton=false&smallPlayButton=false" allowtransparency="true" frameborder="0" scrolling="no" class="w-full h-full" name="wistia_embed" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
+                                        <div class="flex justify-between items-end">
+                                            <div>
+                                                <div class="font-headline-lg text-white">2.3M</div>
+                                                <div class="font-data-mono text-secondary text-xs">VIEWS</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-data-mono text-white text-lg">15</div>
+                                                <div class="font-data-mono text-secondary text-xs">CLIENTS CLOSED</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute -bottom-3 -right-3 w-6 h-6 border-b-2 border-r-2 border-primary-container pointer-events-none"></div>
+                            </div>
+                            
+                            <!-- Slot 2 -->
+                            <div class="relative group w-[85vw] sm:w-[280px] md:w-[300px] lg:w-[340px] flex-shrink-0 snap-center">
+                                <div class="petri-glass p-2 relative overflow-hidden aspect-[9/16] border border-white/20 transition-all duration-300 group-hover:border-primary-container shadow-2xl">
+                                    <iframe src="https://fast.wistia.net/embed/iframe/pmrrhko22q?videoFoam=true&playbar=false&fullscreenButton=false&smallPlayButton=false" allowtransparency="true" frameborder="0" scrolling="no" class="w-full h-full" name="wistia_embed" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
+                                        <div class="flex justify-between items-end">
+                                            <div>
+                                                <div class="font-headline-lg text-white">2069%</div>
+                                                <div class="font-data-mono text-secondary text-xs">VIEWS INCREASE</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute -top-3 -left-3 w-6 h-6 border-t-2 border-l-2 border-primary-container pointer-events-none"></div>
+                            </div>
+                            
+                            <!-- Slot 3 -->
+                            <div class="relative group w-[85vw] sm:w-[280px] md:w-[300px] lg:w-[340px] flex-shrink-0 snap-center">
+                                <div class="petri-glass p-2 relative overflow-hidden aspect-[9/16] border border-white/20 transition-all duration-300 group-hover:border-primary-container shadow-2xl">
+                                    <iframe src="https://fast.wistia.net/embed/iframe/tuxt30fdnt?videoFoam=true&playbar=false&fullscreenButton=false&smallPlayButton=false" allowtransparency="true" frameborder="0" scrolling="no" class="w-full h-full" name="wistia_embed" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
+                                        <div class="flex justify-between items-end">
+                                            <div>
+                                                <div class="font-headline-lg text-white">1M</div>
+                                                <div class="font-data-mono text-secondary text-xs">VIEWS</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-data-mono text-white text-lg">1035%+</div>
+                                                <div class="font-data-mono text-secondary text-xs">ENG RATE</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Slot 4 -->
+                            <div class="relative group w-[85vw] sm:w-[280px] md:w-[300px] lg:w-[340px] flex-shrink-0 snap-center">
+                                <div class="petri-glass p-2 relative overflow-hidden aspect-[9/16] border border-white/20 transition-all duration-300 group-hover:border-primary-container shadow-2xl">
+                                    <iframe src="https://fast.wistia.net/embed/iframe/0mtf1mpagu?videoFoam=true&playbar=false&fullscreenButton=false&smallPlayButton=false" allowtransparency="true" frameborder="0" scrolling="no" class="w-full h-full" name="wistia_embed" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
+                                        <div class="flex justify-between items-end">
+                                            <div>
+                                                <div class="font-headline-lg text-white">10</div>
+                                                <div class="font-data-mono text-secondary text-xs">LEADS GEN.</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-data-mono text-white text-lg">TOP</div>
+                                                <div class="font-data-mono text-secondary text-xs">PERFORMER</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Slot 5 -->
+                            <div class="relative group w-[85vw] sm:w-[280px] md:w-[300px] lg:w-[340px] flex-shrink-0 snap-center">
+                                <div class="petri-glass p-2 relative overflow-hidden aspect-[9/16] border border-white/20 transition-all duration-300 group-hover:border-primary-container shadow-2xl">
+                                    <iframe src="https://fast.wistia.net/embed/iframe/2d55rcrc6k?videoFoam=true&playbar=false&fullscreenButton=false&smallPlayButton=false" allowtransparency="true" frameborder="0" scrolling="no" class="w-full h-full" name="wistia_embed" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
+                                        <div class="flex justify-between items-end">
+                                            <div>
+                                                <div class="font-headline-lg text-white">2.3M</div>
+                                                <div class="font-data-mono text-secondary text-xs">VIEWS</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-data-mono text-white text-lg">2</div>
+                                                <div class="font-data-mono text-secondary text-xs">HIGH VALUE LEADS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slot 6 -->
+                            <div class="relative group w-[85vw] sm:w-[280px] md:w-[300px] lg:w-[340px] flex-shrink-0 snap-center">
+                                <div class="petri-glass p-2 relative overflow-hidden aspect-[9/16] border border-white/20 transition-all duration-300 group-hover:border-primary-container shadow-2xl">
+                                    <iframe src="https://fast.wistia.net/embed/iframe/gprvjnpi68?videoFoam=true&playbar=false&fullscreenButton=false&smallPlayButton=false" allowtransparency="true" frameborder="0" scrolling="no" class="w-full h-full" name="wistia_embed" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
+                                        <div class="flex justify-between items-end">
+                                            <div>
+                                                <div class="font-headline-lg text-white">10M+</div>
+                                                <div class="font-data-mono text-secondary text-xs">VIEWS/MO</div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="font-data-mono text-white text-lg">10K+</div>
+                                                <div class="font-data-mono text-secondary text-xs">FOLLOWERS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== ROADMAP SECTION ====== -->
+            <section id="roadmap" class="w-full py-20 relative border-t border-white/10">
+                <div class="absolute bottom-1/4 right-[-10%] w-[600px] h-[600px] bg-error/10 blur-[150px] rounded-full organic-blob-2 mix-blend-screen pointer-events-none"></div>
+                <div class="max-w-[container-max] mx-auto px-6 md:px-12 relative z-10">
+                    <header class="mb-16 border-b border-white/10 pb-8 relative">
+                        <div class="absolute -left-4 top-0 w-1 h-full bg-primary-container"></div>
+                        <h1 class="font-headline-xl text-headline-xl text-on-background mb-4">THE ROADMAP</h1>
+                        <p class="font-body-lg text-body-lg text-secondary max-w-2xl">A clear 3-month plan designed to build your audience and make your brand go viral, requiring very little of your time.</p>
+                        <div class="mt-8 flex flex-wrap gap-4">
+                            <div class="bg-surface-container-high px-4 py-2 border border-white/10 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary-container text-sm">schedule</span>
+                                <span class="font-data-mono text-on-background">1 HOUR / WEEK FOUNDER/TEAM INPUT</span>
+                            </div>
+                            <div class="bg-surface-container-high px-4 py-2 border border-primary-container/50 flex items-center gap-2 relative overflow-hidden group cursor-crosshair">
+                                <div class="absolute inset-0 bg-primary-container/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                                <span class="material-symbols-outlined text-primary-container text-sm animate-pulse">verified_user</span>
+                                <span class="font-data-mono text-primary-container font-bold">1-MONTH REFUND PROTOCOL</span>
+                            </div>
+                        </div>
+                    </header>
+                    
+                    <div class="relative mt-20">
+                        <div class="absolute left-1/2 md:left-8 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2 md:translate-x-0 hidden md:block"></div>
+                        <!-- Phase 1 -->
+                        <div class="relative grid grid-cols-1 md:grid-cols-[100px_1fr] gap-8 mb-24">
+                            <div class="hidden md:flex flex-col items-center relative z-10">
+                                <div class="w-16 h-16 rounded-full bg-surface-container-low border-2 border-primary-container flex items-center justify-center relative shadow-[0_0_15px_rgba(255,95,0,0.3)]">
+                                    <span class="font-headline-md text-primary-container">01</span>
+                                    <div class="absolute inset-0 rounded-full border border-primary-container animate-[ping_3s_ease-in-out_infinite]"></div>
+                                </div>
+                                <div class="w-[2px] h-full bg-gradient-to-b from-primary-container/50 to-transparent mt-4"></div>
+                            </div>
+                            <div class="petri-glass p-8 relative overflow-hidden group border border-white/10 hover:border-primary-container/50 transition-colors duration-300">
+                                <div class="absolute -right-12 -top-12 w-48 h-48 bg-primary-container/5 rounded-full blur-2xl group-hover:bg-primary-container/10 transition-colors"></div>
+                                <img class="absolute -bottom-10 -right-10 w-32 h-32 object-cover rounded-full opacity-20 mix-blend-screen organic-blob-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkaZi3CUqXBrKP0QFjCCu6oYLlJwnPe_yXgkxPX-dfXdg3BbIZ2AapF81lKxFiWdfYnw3BvnGq9lVgYa2n_xCqGqkoYAUpndAM-u-SNXEWySySpxvDwRMXzDg8PpAxgoUzlE43_86KE33P0gEVjAyHDP7qJkld36i4DGzN6bGsWLmP5ZRrebFmOVcbRvGcpJGE12dDxulVnJrEJRseg9g-gjY4sTprquoEfDayI78isz-XSEzQiFCfg6TjN1ZGzYw59kihkjcvH8FM"/>
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="font-label-caps bg-primary-container text-black px-2 py-1">PHASE 01</span>
+                                    <span class="font-data-mono text-secondary">MONTH 1</span>
+                                </div>
+                                <h3 class="font-headline-lg text-on-background mb-4">EXPERIMENTATION MONTH</h3>
+                                <p class="font-body-md text-on-secondary-container mb-6 max-w-xl">We will make content for your next 5 reels. This month is all about experimentation—we try different ideas and formats that are currently trending in the market.</p>
+                                <div class="grid grid-cols-1 gap-4">
+                                    <div class="bg-black/50 p-4 border border-white/5 flex flex-col gap-2">
+                                        <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">videocam</span>
+                                        <span class="font-body-md text-white/90">We will make content for your next 15 reels, 15 reels batched from one shoot.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Phase 2 -->
+                        <div class="relative grid grid-cols-1 md:grid-cols-[100px_1fr] gap-8 mb-24">
+                            <div class="hidden md:flex flex-col items-center relative z-10">
+                                <div class="w-16 h-16 rounded-full bg-surface-container-low border border-white/30 flex items-center justify-center">
+                                    <span class="font-headline-md text-on-background">02</span>
+                                </div>
+                                <div class="w-[2px] h-full bg-white/10 mt-4"></div>
+                            </div>
+                            <div class="petri-glass p-8 relative overflow-hidden border border-white/10 hover:border-white/30 transition-colors duration-300">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="font-label-caps bg-surface-container-highest text-on-background px-2 py-1 border border-white/10">PHASE 02</span>
+                                    <span class="font-data-mono text-secondary">MONTH 2</span>
+                                </div>
+                                <h3 class="font-headline-lg text-on-background mb-4">DATA-DRIVEN SCALING</h3>
+                                <p class="font-body-md text-on-secondary-container mb-6 max-w-xl">We double down on data. No blind guessing—only executing strategies based on the insights and analytics we gather from the different formats we tested.</p>
+                            </div>
+                        </div>
+                        <!-- Phase 3 -->
+                        <div class="relative grid grid-cols-1 md:grid-cols-[100px_1fr] gap-8">
+                            <div class="hidden md:flex flex-col items-center relative z-10">
+                                <div class="w-16 h-16 rounded-full bg-surface-container-low border border-white/30 flex items-center justify-center">
+                                    <span class="font-headline-md text-on-background">03</span>
+                                </div>
+                            </div>
+                            <div class="petri-glass p-8 relative overflow-hidden border border-white/10 hover:border-white/30 transition-colors duration-300">
+                                <img class="absolute top-0 right-0 w-full h-full object-cover opacity-[0.03] pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA72I1pnVpg2C26hcGSdAFf5XrR-1M5vcU8Rz4iRKFzCpps8ArB5RBf7hHmLU-qZr6M20YkhO5POADzGi59AMoGIruXvQLc1Yr5DRXPDU7LtKlwCat_s5qAj_JcaZXkaHdItw7IiuNbKL3x_xlxbWu7vdlrKG9KlEQiVwOzj2n_9Gus28tE9NFoME6o3tvjooUzMe3u6A_ihUzv7U5RxeWbt6nAFc9jdwcPZs4Sl8fHDn-ACqmCxNc0NRs2cIhES1XA4LMtXs66TNd5"/>
+                                <div class="flex items-center gap-3 mb-4 relative z-10">
+                                    <span class="font-label-caps bg-surface-container-highest text-on-background px-2 py-1 border border-white/10">PHASE 03</span>
+                                    <span class="font-data-mono text-secondary">MONTH 3</span>
+                                </div>
+                                <h3 class="font-headline-lg text-on-background mb-4">THE GUARANTEED VIRALITY</h3>
+                                <p class="font-body-md text-on-secondary-container mb-6 max-w-xl">This is the guaranteed term where you start seeing massive results. Expect your first viral reels around this month. This is a game of patience, not magic from day 1.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== PRICING SECTION ====== -->
+            <section id="pricing" class="w-full py-20 relative border-t border-white/10">
+                <div class="absolute top-20 right-20 w-96 h-96 bg-primary-container/20 rounded-full blur-[100px] mix-blend-screen pointer-events-none z-0"></div>
+                <div class="max-w-container-max mx-auto px-6 md:px-12 relative z-10">
+                    <header class="mb-16 relative">
+                        <div class="font-label-caps text-secondary mb-4 border border-secondary inline-block px-3 py-1 bg-surface-container">PRICING</div>
+                        <h1 class="font-headline-xl text-primary-container uppercase tracking-tighter mb-6 drop-shadow-[2px_2px_0px_rgba(255,255,255,0.1)]">THE FORMULA</h1>
+                        <p class="font-body-md text-secondary max-w-2xl border-l-2 border-primary-container pl-4">Choose the plan that fits your growth goals. Simple, transparent pricing to scale your brand.</p>
+                    </header>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative mb-32">
+                        <!-- Plan 1 -->
+                        <div class="border border-white/20 bg-surface/80 backdrop-blur-2xl p-8 relative group hover:border-primary-container/50 transition-colors flex flex-col">
+                            <div class="absolute top-0 left-0 w-2 h-2 bg-primary-container -translate-x-1/2 -translate-y-1/2"></div>
+                            <div class="absolute top-0 right-0 w-2 h-2 bg-primary-container translate-x-1/2 -translate-y-1/2"></div>
+                            <div class="absolute bottom-0 left-0 w-2 h-2 bg-primary-container -translate-x-1/2 translate-y-1/2"></div>
+                            <div class="absolute bottom-0 right-0 w-2 h-2 bg-primary-container translate-x-1/2 translate-y-1/2"></div>
+                            
+                            <div class="font-data-mono text-secondary mb-2">FOR FOUNDERS & CEOS</div>
+                            <h2 class="font-headline-lg text-on-surface uppercase tracking-tight leading-none mb-8">The Viral<br/>Injection</h2>
+                            
+                            <ul class="flex flex-col gap-4 mb-12 flex-1">
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-secondary">Strategy, ideation & scripting</span></li>
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-secondary">12–16 high-fidelity short-form videos/month</span></li>
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-secondary">Strategic content calendar + narrative design</span></li>
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-secondary">Multi-platform distribution (IG, LinkedIn, YT Shorts)</span></li>
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-secondary">Monthly growth tracking + optimization</span></li>
+                            </ul>
+                            
+                            <a href="#booking" class="block text-center w-full border border-white text-white font-headline-md text-sm py-4 hover:bg-primary-container hover:text-black hover:border-primary-container transition-all uppercase tracking-widest mt-auto">BOOK CALENDAR</a>
+                        </div>
+                        
+                        <!-- Plan 2 -->
+                        <div class="border border-primary-container/50 bg-primary-container/5 backdrop-blur-2xl p-8 relative group hover:bg-primary-container/10 transition-colors flex flex-col">
+                            <div class="absolute top-0 left-0 w-2 h-2 bg-primary-container -translate-x-1/2 -translate-y-1/2"></div>
+                            <div class="absolute top-0 right-0 w-2 h-2 bg-primary-container translate-x-1/2 -translate-y-1/2"></div>
+                            <div class="absolute bottom-0 left-0 w-2 h-2 bg-primary-container -translate-x-1/2 translate-y-1/2"></div>
+                            <div class="absolute bottom-0 right-0 w-2 h-2 bg-primary-container translate-x-1/2 translate-y-1/2"></div>
+                            
+                            <div class="font-data-mono text-primary-container mb-2">FOR BRANDS [ RECOMMENDED ]</div>
+                            <h2 class="font-headline-lg text-primary-container uppercase tracking-tight leading-none mb-8">The Viral<br/>Outbreak</h2>
+                            
+                            <ul class="flex flex-col gap-4 mb-12 flex-1">
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-on-surface">Strategy, ideation & scripting</span></li>
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-on-surface">12–16 high-fidelity short-form videos/month</span></li>
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-on-surface">Strategic content calendar + narrative design</span></li>
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-on-surface">Multi-platform distribution (IG, LinkedIn, YT Shorts)</span></li>
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-on-surface">Monthly growth tracking + optimization</span></li>
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-primary-container font-bold">Dedicated model/influencer for your brand</span></li>
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-primary-container font-bold">Full production, writing & scripting on our end</span></li>
+                                <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary-container text-xl shrink-0">check_box</span><span class="font-body-md text-primary-container font-bold">Zero founder input required at any cost</span></li>
+                            </ul>
+                            
+                            <a href="#booking" class="block text-center w-full bg-primary-container text-black font-headline-md text-sm py-4 hover:bg-white transition-all uppercase tracking-widest mt-auto">BOOK CALENDAR</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ====== TESTIMONIALS SECTION ====== -->
+            <section id="reviews" class="w-full py-16 relative border-t border-white/10 overflow-hidden bg-surface-container-lowest">
+                <style>
+                    @keyframes scrollX {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    .animate-scrollX {
+                        animation: scrollX 30s linear infinite;
+                        width: max-content;
+                    }
+                    .animate-scrollX:hover {
+                        animation-play-state: paused;
+                    }
+                </style>
+                
+                <div class="max-w-container-max mx-auto px-6 md:px-12 relative z-10 mb-8">
+                    <h3 class="font-data-mono text-secondary pl-4 border-l-2 border-white/20 uppercase tracking-widest">What Our Clients Say</h3>
+                </div>
+                
+                <div class="flex gap-6 animate-scrollX px-6">
+                    <!-- Set 1 -->
+                    <div class="flex gap-6">
+                        <!-- Card 1 -->
+                        <div class="bg-black p-8 border border-white/10 rounded-2xl w-[350px] flex flex-col justify-between shadow-2xl">
+                            <p class="font-body-md text-white/90 mb-8 leading-relaxed">"Utkarsh is phenomenal in his creativity with his video ideas."</p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-white/20">
+                                    <span class="material-symbols-outlined text-secondary text-sm">person</span>
+                                </div>
+                                <div>
+                                    <div class="font-headline-sm text-on-surface text-sm">Nitesh</div>
+                                    <div class="font-data-mono text-secondary text-[10px]">Hairbyniteshh</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="bg-black p-8 border border-white/10 rounded-2xl w-[350px] flex flex-col justify-between shadow-2xl">
+                            <p class="font-body-md text-white/90 mb-8 leading-relaxed">"The Viral Labs team is prompt in their response and always ready for new ideas in the content space."</p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-white/20">
+                                    <span class="material-symbols-outlined text-secondary text-sm">person</span>
+                                </div>
+                                <div>
+                                    <div class="font-headline-sm text-on-surface text-sm">Sachin</div>
+                                    <div class="font-data-mono text-secondary text-[10px]">Marketing Head, Popular Salon Chain</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="bg-black p-8 border border-white/10 rounded-2xl w-[350px] flex flex-col justify-between shadow-2xl">
+                            <p class="font-body-md text-white/90 mb-8 leading-relaxed">"Our experience working with Utkarsh was nothing short of exceptional."</p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-white/20">
+                                    <span class="material-symbols-outlined text-secondary text-sm">person</span>
+                                </div>
+                                <div>
+                                    <div class="font-headline-sm text-on-surface text-sm">Rajat Jain</div>
+                                    <div class="font-data-mono text-secondary text-[10px]">CEO at Sunfox Technology</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="bg-black p-8 border border-white/10 rounded-2xl w-[350px] flex flex-col justify-between shadow-2xl">
+                            <p class="font-body-md text-white/90 mb-8 leading-relaxed">"The dedication of this team is on another level; the amount of work they do behind each reel is incredible."</p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-white/20">
+                                    <span class="material-symbols-outlined text-secondary text-sm">person</span>
+                                </div>
+                                <div>
+                                    <div class="font-headline-sm text-on-surface text-sm">Gourav Gupta</div>
+                                    <div class="font-data-mono text-secondary text-[10px]">Client</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Set 2 (Duplicate for infinite scroll) -->
+                    <div class="flex gap-6">
+                        <!-- Card 1 -->
+                        <div class="bg-black p-8 border border-white/10 rounded-2xl w-[350px] flex flex-col justify-between shadow-2xl">
+                            <p class="font-body-md text-white/90 mb-8 leading-relaxed">"Utkarsh is phenomenal in his creativity with his video ideas."</p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-white/20">
+                                    <span class="material-symbols-outlined text-secondary text-sm">person</span>
+                                </div>
+                                <div>
+                                    <div class="font-headline-sm text-on-surface text-sm">Nitesh</div>
+                                    <div class="font-data-mono text-secondary text-[10px]">Hairbyniteshh</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="bg-black p-8 border border-white/10 rounded-2xl w-[350px] flex flex-col justify-between shadow-2xl">
+                            <p class="font-body-md text-white/90 mb-8 leading-relaxed">"The Viral Labs team is prompt in their response and always ready for new ideas in the content space."</p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-white/20">
+                                    <span class="material-symbols-outlined text-secondary text-sm">person</span>
+                                </div>
+                                <div>
+                                    <div class="font-headline-sm text-on-surface text-sm">Sachin</div>
+                                    <div class="font-data-mono text-secondary text-[10px]">Marketing Head, Popular Salon Chain</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="bg-black p-8 border border-white/10 rounded-2xl w-[350px] flex flex-col justify-between shadow-2xl">
+                            <p class="font-body-md text-white/90 mb-8 leading-relaxed">"Our experience working with Utkarsh was nothing short of exceptional."</p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-white/20">
+                                    <span class="material-symbols-outlined text-secondary text-sm">person</span>
+                                </div>
+                                <div>
+                                    <div class="font-headline-sm text-on-surface text-sm">Rajat Jain</div>
+                                    <div class="font-data-mono text-secondary text-[10px]">CEO at Sunfox Technology</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="bg-black p-8 border border-white/10 rounded-2xl w-[350px] flex flex-col justify-between shadow-2xl">
+                            <p class="font-body-md text-white/90 mb-8 leading-relaxed">"The dedication of this team is on another level; the amount of work they do behind each reel is incredible."</p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-white/20">
+                                    <span class="material-symbols-outlined text-secondary text-sm">person</span>
+                                </div>
+                                <div>
+                                    <div class="font-headline-sm text-on-surface text-sm">Gourav Gupta</div>
+                                    <div class="font-data-mono text-secondary text-[10px]">Client</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ====== BOOKING SECTION ====== -->
+            <section id="booking" class="w-full py-24 relative border-t border-white/10 bg-black">
+                <div class="max-w-container-max mx-auto px-6 md:px-12 relative z-10">
+                    <header class="mb-16 border-l-[3px] border-[#FF5F00] pl-6 text-left">
+                        <h2 class="text-5xl md:text-7xl font-bold font-['Space_Grotesk'] text-white uppercase tracking-tighter mb-4">GET IN TOUCH</h2>
+                        <p class="font-body-lg text-white/60 max-w-2xl">Schedule a free consultation to explore tailored strategies for your brand's growth.</p>
+                    </header>
+                    
+                    <div class="bg-surface/50 p-4 rounded-3xl border border-white/10 mx-auto max-w-4xl backdrop-blur-md shadow-2xl">
+                        <!-- Calendly inline widget begin -->
+                        <div class="calendly-inline-widget mx-auto" data-url="https://calendly.com/utkarshlivee/30min?hide_event_type_details=1&hide_gdpr_banner=1" style="min-width:320px;height:700px;"></div>
+                        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                        <!-- Calendly inline widget end -->
+                    </div>
+                </div>
+            </section>
+            <!-- ====== CLIENTS TICKER ====== -->
+            <section class="w-full py-16 border-t border-white/10 bg-black overflow-hidden relative mt-12">
+                <div class="max-w-container-max mx-auto px-6 md:px-12 relative z-10 text-center mb-10">
+                    <div class="font-label-caps text-secondary mb-4 border border-white/10 inline-block px-4 py-1 bg-surface-container rounded-full shadow-lg">TRUSTED BY</div>
+                    <h3 class="font-data-mono text-white/40 uppercase tracking-[0.2em] text-sm">Companies worked with</h3>
+                </div>
+                <style>
+                    @keyframes scrollClients {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    .animate-scrollClients {
+                        animation: scrollClients 20s linear infinite;
+                        width: max-content;
+                    }
+                </style>
+                <div class="flex gap-20 items-center opacity-40 hover:opacity-100 transition-opacity duration-500 animate-scrollClients px-8">
+                    <!-- Set 1 -->
+                    <div class="flex gap-20 items-center">
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tighter">Zomato</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tighter italic">Paytm</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-[#FF5F00] tracking-widest uppercase">BINANCE</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tighter italic">VISA</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tight">Shiprocket</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tighter">Builder.ai</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tight uppercase">SCALER</div>
+                    </div>
+                    <!-- Set 2 -->
+                    <div class="flex gap-20 items-center">
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tighter">Zomato</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tighter italic">Paytm</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-[#FF5F00] tracking-widest uppercase">BINANCE</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tighter italic">VISA</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tight">Shiprocket</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tighter">Builder.ai</div>
+                        <div class="text-3xl font-bold font-['Space_Grotesk'] text-white tracking-tight uppercase">SCALER</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ====== FOOTER ====== -->
+            <footer class="w-full py-8 px-10 flex flex-col md:flex-row justify-between items-center bg-[url('https://www.transparenttextures.com/patterns/graph-paper.png')] bg-fixed bg-black border-t-2 border-[#FF5F00] relative z-20">
+                <div class="text-[#FF5F00] font-mono uppercase text-[10px] tracking-widest mb-4 md:mb-0 text-center md:text-left flex flex-col gap-2">
+                    <span>©2026 THE VIRAL LABS // EXPERIMENTAL PROTOCOL SECURED</span>
+                    <a href="mailto:utkarsh@thevirallabs.com" class="text-white/60 hover:text-white transition-colors lowercase text-xs">utkarsh@thevirallabs.com</a>
+                </div>
+                <div class="flex gap-6 font-mono uppercase text-[10px] tracking-widest">
+                    <a class="text-white/30 hover:text-white transition-colors" href="#">REPORT BUG</a>
+                    <a class="text-white/30 hover:text-white transition-colors" href="#">TERMINATE SESSION</a>
+                    <a class="text-white/30 hover:text-white transition-colors" href="#">DATA PRIVACY</a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Active link styling script -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

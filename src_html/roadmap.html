@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>THE ACCELERATOR - Roadmap</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#370e00",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary-container": "#b4b5b5",
+                        "on-primary": "#5a1c00",
+                        "surface-container-highest": "#353534",
+                        "secondary": "#c6c6c7",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#7f2b00",
+                        "on-tertiary": "#2f3131",
+                        "outline-variant": "#5b4137",
+                        "on-primary-container": "#531a00",
+                        "tertiary-fixed": "#e3e2e2",
+                        "primary-fixed-dim": "#ffb599",
+                        "error-container": "#93000a",
+                        "outline": "#ab8a7d",
+                        "inverse-on-surface": "#313030",
+                        "surface-container": "#201f1f",
+                        "surface-variant": "#353534",
+                        "on-background": "#e5e2e1",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-error": "#690005",
+                        "primary-container": "#ff5f00",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "on-tertiary-container": "#2c2d2d",
+                        "primary-fixed": "#ffdbce",
+                        "tertiary-fixed-dim": "#c7c6c6",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-secondary": "#2f3131",
+                        "on-surface-variant": "#e4bfb1",
+                        "inverse-primary": "#a63b00",
+                        "surface": "#131313",
+                        "primary": "#ffb599",
+                        "secondary-fixed": "#e2e2e2",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#393939",
+                        "tertiary-container": "#949494",
+                        "tertiary": "#c7c6c6",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-tertiary-fixed-variant": "#464747",
+                        "secondary-container": "#454747",
+                        "surface-tint": "#ffb599"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "grid-unit": "8px",
+                        "margin": "40px",
+                        "container-max": "1440px",
+                        "gutter": "24px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Lexend"],
+                        "body-md": ["Lexend"],
+                        "data-mono": ["Space Grotesk"],
+                        "headline-xl": ["Lexend"],
+                        "body-lg": ["Lexend"],
+                        "headline-lg": ["Lexend"],
+                        "label-caps": ["Space Grotesk"]
+                    },
+                    fontSize: {
+                        "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "data-mono": ["14px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "headline-xl": ["80px", { "lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }]
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><rect width=\"24\" height=\"24\" fill=\"none\"/><path d=\"M24 0v24H0V0h24z\" fill=\"none\"/><path d=\"M23 1v22H1V1h22zm-1 1H2v20h20V2z\" fill=\"%23ffffff\" fill-opacity=\"0.05\"/></svg>')",
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .petri-glass {
+            background: rgba(42, 42, 42, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .organic-blob-1 {
+            border-radius: 43% 57% 65% 35% / 44% 39% 61% 56%;
+        }
+        .organic-blob-2 {
+            border-radius: 61% 39% 36% 64% / 44% 53% 47% 56%;
+        }
+        .grid-bg {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary-container selection:text-black">
+<!-- Background Grid & Effects -->
+<div class="fixed inset-0 z-[-2] grid-bg opacity-30 pointer-events-none"></div>
+<div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden flex justify-center items-center">
+<div class="absolute top-1/4 left-[-10%] w-[500px] h-[500px] bg-primary-container/10 blur-[120px] rounded-full organic-blob-1 mix-blend-screen"></div>
+<div class="absolute bottom-1/4 right-[-10%] w-[600px] h-[600px] bg-error/10 blur-[150px] rounded-full organic-blob-2 mix-blend-screen"></div>
+</div>
+<!-- TopAppBar -->
+<nav class="flex justify-between items-center px-6 py-4 w-full h-20 bg-black/90 backdrop-blur-xl docked full-width top-0 border-b-2 border-[#FF5F00] z-50 fixed">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black tracking-tighter text-[#FF5F00]">THE VIRAL LABS</span>
+</div>
+<div class="hidden md:flex gap-8">
+<a class="font-['Lexend'] uppercase tracking-[0.2em] font-bold text-sm text-white/60 hover:text-white transition-colors hover:bg-[#FF5F00] hover:text-black px-3 py-2" href="#">HOME</a>
+<a class="font-['Lexend'] uppercase tracking-[0.2em] font-bold text-sm text-[#FF5F00] border-b-2 border-[#FF5F00] pb-1 px-3 py-2 scale-95 opacity-90" href="#">SEQUENCES</a>
+<a class="font-['Lexend'] uppercase tracking-[0.2em] font-bold text-sm text-white/60 hover:text-white transition-colors hover:bg-[#FF5F00] hover:text-black px-3 py-2" href="#">ANALYTICS</a>
+</div>
+<div class="flex items-center gap-4 text-[#FF5F00]">
+<span class="material-symbols-outlined cursor-pointer hover:bg-[#FF5F00] hover:text-black transition-all duration-75 p-1">science</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-[#FF5F00] hover:text-black transition-all duration-75 p-1">biotech</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-[#FF5F00] hover:text-black transition-all duration-75 p-1">terminal</span>
+</div>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<div class="hidden md:flex flex-col h-full pt-24 fixed left-0 top-0 w-64 bg-black border-r border-white/20 z-40">
+<div class="px-6 pb-8 border-b border-white/10">
+<h2 class="font-headline-md text-headline-md text-[#FF5F00] tracking-tighter">BIO-CONSOLE v1.0</h2>
+<p class="font-data-mono text-data-mono text-error mt-2 uppercase tracking-widest flex items-center gap-2">
+<span class="w-2 h-2 bg-error rounded-full animate-pulse"></span>
+                STATUS: AGGRESSIVE
+            </p>
+</div>
+<div class="flex flex-col mt-4">
+<a class="font-['Lexend'] uppercase tracking-widest text-xs bg-[#FF5F00] text-black font-bold p-4 flex items-center gap-3 w-full translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">genetics</span>
+                SEQUENCES
+            </a>
+<a class="font-['Lexend'] uppercase tracking-widest text-xs text-white/40 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all hover:bg-white/10 hover:text-white" href="#">
+<span class="material-symbols-outlined">microbiology</span>
+                CULTURES
+            </a>
+<a class="font-['Lexend'] uppercase tracking-widest text-xs text-white/40 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all hover:bg-white/10 hover:text-white" href="#">
+<span class="material-symbols-outlined">coronavirus</span>
+                MUTATIONS
+            </a>
+<a class="font-['Lexend'] uppercase tracking-widest text-xs text-white/40 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all hover:bg-white/10 hover:text-white" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+                ANALYTICS
+            </a>
+<a class="font-['Lexend'] uppercase tracking-widest text-xs text-white/40 p-4 flex items-center gap-3 w-full hover:bg-white/5 transition-all hover:bg-white/10 hover:text-white" href="#">
+<span class="material-symbols-outlined">folder_zip</span>
+                ARCHIVE
+            </a>
+</div>
+</div>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full md:pl-64 pt-24 px-4 md:px-8 pb-32">
+<div class="max-w-container-max mx-auto">
+<!-- Header Section -->
+<header class="mb-16 border-b border-white/10 pb-8 relative">
+<div class="absolute -left-4 top-0 w-1 h-full bg-primary-container"></div>
+<h1 class="font-headline-xl text-headline-xl text-on-background mb-4">THE ACCELERATOR</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl">A 3-month high-velocity protocol visualized as a bio-chemical sequence. Designed for maximum output with minimal founder input.</p>
+<div class="mt-8 flex flex-wrap gap-4">
+<div class="bg-surface-container-high px-4 py-2 border border-white/10 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-sm">schedule</span>
+<span class="font-data-mono text-data-mono text-on-background">1 HOUR / WEEK FOUNDER INPUT</span>
+</div>
+<div class="bg-surface-container-high px-4 py-2 border border-primary-container/50 flex items-center gap-2 relative overflow-hidden group cursor-crosshair">
+<div class="absolute inset-0 bg-primary-container/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+<span class="material-symbols-outlined text-primary-container text-sm animate-pulse">verified_user</span>
+<span class="font-data-mono text-data-mono text-primary-container font-bold">1-MONTH REFUND PROTOCOL</span>
+</div>
+</div>
+</header>
+<!-- Roadmap Sequence -->
+<div class="relative mt-20">
+<!-- Sequence Connector Line -->
+<div class="absolute left-1/2 md:left-8 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2 md:translate-x-0 hidden md:block"></div>
+<!-- Phase 1 -->
+<div class="relative grid grid-cols-1 md:grid-cols-[100px_1fr] gap-8 mb-24">
+<div class="hidden md:flex flex-col items-center relative z-10">
+<div class="w-16 h-16 rounded-full bg-surface-container-low border-2 border-primary-container flex items-center justify-center relative shadow-[0_0_15px_rgba(255,95,0,0.3)]">
+<span class="font-headline-md text-headline-md text-primary-container">01</span>
+<div class="absolute inset-0 rounded-full border border-primary-container animate-[ping_3s_ease-in-out_infinite]"></div>
+</div>
+<div class="w-[2px] h-full bg-gradient-to-b from-primary-container/50 to-transparent mt-4"></div>
+</div>
+<div class="petri-glass p-8 relative overflow-hidden group border border-white/10 hover:border-primary-container/50 transition-colors duration-300">
+<!-- Abstract Microbe Decor -->
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-primary-container/5 rounded-full blur-2xl group-hover:bg-primary-container/10 transition-colors"></div>
+<img alt="abstract microscopic view of glowing orange cells multiplying on a dark background, scientific visualization" class="absolute -bottom-10 -right-10 w-32 h-32 object-cover rounded-full opacity-20 mix-blend-screen organic-blob-1" data-alt="abstract microscopic view of glowing orange cells multiplying on a dark background, scientific visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkaZi3CUqXBrKP0QFjCCu6oYLlJwnPe_yXgkxPX-dfXdg3BbIZ2AapF81lKxFiWdfYnw3BvnGq9lVgYa2n_xCqGqkoYAUpndAM-u-SNXEWySySpxvDwRMXzDg8PpAxgoUzlE43_86KE33P0gEVjAyHDP7qJkld36i4DGzN6bGsWLmP5ZRrebFmOVcbRvGcpJGE12dDxulVnJrEJRseg9g-gjY4sTprquoEfDayI78isz-XSEzQiFCfg6TjN1ZGzYw59kihkjcvH8FM"/>
+<div class="flex items-center gap-3 mb-4">
+<span class="font-label-caps text-label-caps bg-primary-container text-black px-2 py-1">PHASE 01</span>
+<span class="font-data-mono text-data-mono text-secondary">MONTH 1</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-background mb-4">IMPACT-DRIVEN CONTENT</h3>
+<p class="font-body-md text-body-md text-on-secondary-container mb-6 max-w-xl">Initial inoculation. We extract your raw expertise in a single 1-hour session and synthesize it into a highly volatile batch of short-form assets.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-black/50 p-4 border border-white/5 flex flex-col gap-2">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">videocam</span>
+<span class="font-data-mono text-data-mono text-on-background">45 REELS BATCHED</span>
+<span class="text-[10px] text-secondary font-mono">YIELD: HIGH</span>
+</div>
+<div class="bg-black/50 p-4 border border-white/5 flex flex-col gap-2">
+<span class="material-symbols-outlined text-primary-container">psychology</span>
+<span class="font-data-mono text-data-mono text-on-background">NARRATIVE EXTRACTION</span>
+<span class="text-[10px] text-secondary font-mono">INPUT: 1HR / WK</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 2 -->
+<div class="relative grid grid-cols-1 md:grid-cols-[100px_1fr] gap-8 mb-24">
+<div class="hidden md:flex flex-col items-center relative z-10">
+<div class="w-16 h-16 rounded-full bg-surface-container-low border border-white/30 flex items-center justify-center">
+<span class="font-headline-md text-headline-md text-on-background">02</span>
+</div>
+<div class="w-[2px] h-full bg-white/10 mt-4"></div>
+</div>
+<div class="petri-glass p-8 relative overflow-hidden border border-white/10 hover:border-white/30 transition-colors duration-300">
+<div class="flex items-center gap-3 mb-4">
+<span class="font-label-caps text-label-caps bg-surface-container-highest text-on-background px-2 py-1 border border-white/10">PHASE 02</span>
+<span class="font-data-mono text-data-mono text-secondary">MONTH 2</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-background mb-4">WORLD-CLASS EDITING</h3>
+<p class="font-body-md text-body-md text-on-secondary-container mb-6 max-w-xl">Mutation and refinement. Raw data is processed through our high-end editing protocols to maximize retention and engagement metrics.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="bg-surface-container px-3 py-1 text-xs font-mono text-secondary border border-white/5">DYNAMIC_PACING</span>
+<span class="bg-surface-container px-3 py-1 text-xs font-mono text-secondary border border-white/5">HOOK_OPTIMIZATION</span>
+<span class="bg-surface-container px-3 py-1 text-xs font-mono text-secondary border border-white/5">AUDIO_DESIGN</span>
+</div>
+</div>
+</div>
+<!-- Phase 3 -->
+<div class="relative grid grid-cols-1 md:grid-cols-[100px_1fr] gap-8">
+<div class="hidden md:flex flex-col items-center relative z-10">
+<div class="w-16 h-16 rounded-full bg-surface-container-low border border-white/30 flex items-center justify-center">
+<span class="font-headline-md text-headline-md text-on-background">03</span>
+</div>
+</div>
+<div class="petri-glass p-8 relative overflow-hidden border border-white/10 hover:border-white/30 transition-colors duration-300">
+<img alt="digital data visualization network graph with glowing neon lines on black background" class="absolute top-0 right-0 w-full h-full object-cover opacity-[0.03] pointer-events-none" data-alt="digital data visualization network graph with glowing neon lines on black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA72I1pnVpg2C26hcGSdAFf5XrR-1M5vcU8Rz4iRKFzCpps8ArB5RBf7hHmLU-qZr6M20YkhO5POADzGi59AMoGIruXvQLc1Yr5DRXPDU7LtKlwCat_s5qAj_JcaZXkaHdItw7IiuNbKL3x_xlxbWu7vdlrKG9KlEQiVwOzj2n_9Gus28tE9NFoME6o3tvjooUzMe3u6A_ihUzv7U5RxeWbt6nAFc9jdwcPZs4Sl8fHDn-ACqmCxNc0NRs2cIhES1XA4LMtXs66TNd5"/>
+<div class="flex items-center gap-3 mb-4 relative z-10">
+<span class="font-label-caps text-label-caps bg-surface-container-highest text-on-background px-2 py-1 border border-white/10">PHASE 03</span>
+<span class="font-data-mono text-data-mono text-secondary">MONTH 3</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-background mb-4 relative z-10">GROWTH-OPTIMIZED STRATEGY</h3>
+<p class="font-body-md text-body-md text-on-secondary-container mb-6 max-w-xl relative z-10">Proliferation. Deployment of content across targeted vectors. We analyze performance data to recalibrate the algorithm in real-time.</p>
+<button class="bg-primary-container text-black font-headline-md text-sm px-8 py-4 uppercase tracking-widest hover:bg-white transition-colors flex items-center gap-2 relative z-10">
+                            INITIATE PROTOCOL
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 px-10 flex flex-col md:flex-row justify-between items-center bg-[url('https://www.transparenttextures.com/patterns/graph-paper.png')] bg-fixed bg-black border-t-2 border-[#FF5F00] mt-auto relative z-40 md:ml-64 md:w-[calc(100%-16rem)]">
+<span class="font-mono uppercase text-[10px] tracking-widest text-[#FF5F00] mb-4 md:mb-0">©2024 THE VIRAL LABS // EXPERIMENTAL PROTOCOL SECURED</span>
+<div class="flex gap-6">
+<a class="font-mono uppercase text-[10px] tracking-widest text-white/30 hover:text-white hover:text-[#FF5F00] transition-colors" href="#">REPORT BUG</a>
+<a class="font-mono uppercase text-[10px] tracking-widest text-white/30 hover:text-white hover:text-[#FF5F00] transition-colors" href="#">TERMINATE SESSION</a>
+<a class="font-mono uppercase text-[10px] tracking-widest text-white/30 hover:text-white hover:text-[#FF5F00] transition-colors" href="#">DATA PRIVACY</a>
+</div>
+</footer>
+</body></html>
