@@ -36,9 +36,9 @@ import re
 import statistics
 import sys
 
-WORD_RE = re.compile(r"[A-Za-z0-9$%'’-]+")
+WORD_RE = re.compile(r"[A-Za-z0-9$₹%'’-]+")
 NUMBER_RE = re.compile(
-    r"\$\s?\d[\d,]*(?:\.\d+)?"                       # money, whole
+    r"[$₹]\s?\d[\d,]*(?:\.\d+)?"                     # money, whole
     r"|\b\d[\d,]*(?:\.\d+)?\s?"                      # a figure, with or
     r"(?:%|k\b|x\b|hrs?\b|hours?\b|mins?\b|minutes?\b"  # without a unit
     r"|days?\b|weeks?\b|months?\b|years?\b)?",
@@ -56,10 +56,29 @@ SPOKEN_NUMBERS = {
     "ten", "eleven", "twelve", "fifteen", "twenty", "thirty", "forty", "fifty",
     "sixty", "seventy", "eighty", "ninety", "hundred", "thousand", "million",
     "billion", "dozen", "half", "twice", "triple",
+    # Hinglish, as said on camera. "ek" is left out for the same reason as "one".
+    "do", "teen", "char", "chaar", "paanch", "panch", "chhe", "saat", "aath",
+    "nau", "das", "bees", "pachaas", "sau", "hazaar", "hazar", "lakh",
+    "lakhs", "crore", "crores", "karod", "aadha", "dugna",
 }
 MONEY_WORDS = {
     "dollars", "dollar", "bucks", "grand", "percent", "cents",
     "millionaire", "billionaire", "revenue", "profit", "salary", "rent",
+    "rupaye", "rupee", "rupees", "rs", "paisa", "paise", "kamai", "kamao",
+    "kamate", "kama", "fees", "fee", "margin",
+}
+
+# Naming who the reel is for is as concrete as a number: "Gastroenterologist,
+# yeh galti mat karo" lands on exactly the people it should.
+AUDIENCE = {
+    "doctor", "doctors", "dr", "gastroenterologist", "dermatologist", "dermat",
+    "cardiologist", "gynecologist", "gynaecologist", "pediatrician",
+    "paediatrician", "orthopedic", "ortho", "psychiatrist", "psychologist",
+    "cardiologists", "dermatologists", "neurologist", "oncologist", "urologist", "endocrinologist", "surgeon",
+    "dentist", "physiotherapist", "physio", "dietitian", "nutritionist",
+    "lawyer", "lawyers", "architect", "architects", "realtor", "realtors",
+    "founder", "founders", "coach", "coaches", "trainer", "trainers",
+    "salon", "gym", "clinic", "ca", "chartered",
 }
 
 # Words that put something on the line. A hook with none of these is a
@@ -76,6 +95,12 @@ STAKES = {
     "before", "until", "instead", "but", "except", "unless", "problem",
     "risk", "danger", "warning", "regret", "wish", "should", "shouldn't",
     "still", "already", "only", "without", "versus", "vs", "actually",
+    # Hinglish tension words.
+    "mat", "band", "galti", "galtiyan", "nahi", "nhi", "ni", "kabhi", "koi",
+    "nuksaan", "nuksan", "bekaar", "bakwaas", "jhooth", "jhoot", "sach",
+    "myth", "lekin", "sirf", "bina", "khatarnak", "khatra", "dhoka", "zaroor",
+    "pehle", "bachna", "bacho", "sabse", "kharab", "kharaab", "barbaad",
+    "risk", "fail", "gayab", "secret", "raaz", "asli", "nakli",
 }
 
 # Openers that spend the first second saying nothing.
@@ -86,6 +111,8 @@ WEAK_OPENERS = [
     "have you", "did you", "do you", "are you", "in this", "in today",
     "the thing", "a lot", "there is", "there are", "this is", "it is",
     "as a", "when it", "if you've", "you know",
+    "namaste", "namaskar", "dosto", "doston", "toh", "aaj hum", "aaj main",
+    "hi main", "main hoon", "mera naam",
 ]
 
 # Imperatives that earn the front position.
@@ -93,6 +120,8 @@ IMPERATIVES = {
     "stop", "steal", "copy", "delete", "try", "watch", "read", "save",
     "use", "build", "make", "write", "send", "take", "start", "quit",
     "never", "always", "don't", "dont", "do", "put", "run", "check",
+    "dekho", "ye", "yeh", "socho", "suno", "ruko", "mat", "band", "becho",
+    "karo", "seekho", "chhodo", "likho", "pucho", "poocho",
 }
 
 DEALBREAKERS = [
@@ -100,7 +129,7 @@ DEALBREAKERS = [
      "Opens with \"stop scrolling\". Asking for attention proves you have not earned it."),
     (re.compile(r"(?i)\b(?:in (?:this|today'?s) (?:video|reel)|i'?m going to show you|i'?ll show you how)\b"),
      "Video preamble. Delete it and open on the payoff."),
-    (re.compile(r"(?i)^\s*(?:hey |hi |what'?s up |welcome )"),
+    (re.compile(r"(?i)^\s*(?:hey |hi |what'?s up |welcome |namaste|namaskar|dosto|doston|mera naam )"),
      "Greeting. Nobody came to the feed to be greeted."),
     (HASHTAG_RE,
      "Hashtag in the hook. Hashtags belong at the bottom of the caption, if anywhere."),
@@ -140,7 +169,8 @@ def check_specificity(text):
     nums = [n.strip() for n in NUMBER_RE.findall(text) if n.strip()]
     propers = set(PROPER_RE.findall(text))
     low = [w.lower().strip("'’") for w in words(text)]
-    spoken = [w for w in low if w in SPOKEN_NUMBERS or w in MONEY_WORDS]
+    spoken = [w for w in low if w in SPOKEN_NUMBERS or w in MONEY_WORDS
+              or w in AUDIENCE or w.rstrip("s") in AUDIENCE]
     hits = len(nums) + len(propers) + len(spoken)
     score = 15.0 if hits == 0 else clamp(45 + hits * 30)
     found = ", ".join(nums[:2] + sorted(propers)[:2] + spoken[:2])
@@ -153,7 +183,7 @@ def check_stakes(text):
     w = [x.lower().strip("'’") for x in words(text)]
     hits = [x for x in w if x in STAKES]
     markers = sorted(set(hits))
-    if re.search(r"\$\s?\d", text):
+    if re.search(r"[$₹]\s?\d", text):
         markers.append("a price")
     n = len(markers)
     score = {0: 20.0, 1: 70.0}.get(n, 100.0)
@@ -177,7 +207,7 @@ def check_frontload(text):
             break
     payload = None
     for i, token in enumerate(low):
-        if (token in STAKES or token in SPOKEN_NUMBERS or token in MONEY_WORDS
+        if (token in STAKES or token in SPOKEN_NUMBERS or token in MONEY_WORDS or token in AUDIENCE
                 or NUMBER_RE.match(w[i]) or (i and PROPER_RE.match(w[i]))):
             payload = i
             break
@@ -201,11 +231,12 @@ def check_address(text):
     """Aimed at one viewer, or floating in the air."""
     low = text.lower()
     w = [x.lower().strip("'’") for x in words(text)]
-    if re.search(r"\b(you|your|you're|youre|yourself)\b", low):
+    if re.search(r"\b(you|your|you're|youre|yourself|aap|aapka|aapki|aapke|aapko|"
+                 r"tum|tumhara|tumhari|tumhare|tumko|tumhe|tu|tera|teri|tujhe)\b", low):
         return 100.0, "speaks to the viewer"
     if w and w[0] in IMPERATIVES:
         return 90.0, f"imperative opener (\"{w[0]}\")"
-    if re.search(r"\b(i|my|me|we|our)\b", low):
+    if re.search(r"\b(i|my|me|we|our|main|mein|mujhe|mera|meri|mere|hum|humara|hamara)\b", low):
         return 70.0, "first person, no viewer named"
     return 35.0, "third person, nobody in the room"
 
